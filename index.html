@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>후쿠오카 여행 일정표 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B3A6B;
+    --blue: #2E6DB4;
+    --sky: #D6E8F7;
+    --teal: #1A7A6E;
+    --teal-bg: #D5EDE9;
+    --amber: #D4651A;
+    --amber-bg: #FDF0E3;
+    --rose: #B83232;
+    --rose-bg: #FDECEA;
+    --sand: #F7F4EF;
+    --warm-white: #FDFCFA;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: #E2DDD6;
+    --shadow: 0 2px 16px rgba(27,58,107,0.07);
+    --shadow-hover: 0 8px 32px rgba(27,58,107,0.13);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--sand); color: var(--text); min-height: 100vh; }
+
+  /* 헤더 */
+  .header { background: var(--navy); padding: 48px 40px 40px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.04); }
+  .header::after { content:''; position:absolute; bottom:-80px; left:-40px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.03); }
+  .header-label { font-size:12px; letter-spacing:3px; color:rgba(255,255,255,0.5); text-transform:uppercase; margin-bottom:12px; }
+  .header-title { font-family:'Noto Serif KR',serif; font-size:38px; font-weight:700; color:#fff; margin-bottom:10px; letter-spacing:-0.5px; }
+  .header-sub { font-size:14px; color:rgba(255,255,255,0.6); letter-spacing:1px; }
+  .header-badges { display:flex; justify-content:center; gap:10px; margin-top:20px; flex-wrap:wrap; }
+  .header-badge { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.85); padding:6px 16px; border-radius:20px; font-size:12px; }
+
+  /* 레이아웃 */
+  .container { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* 탭 */
+  .day-tabs { display:flex; gap:8px; margin-bottom:32px; background:var(--warm-white); padding:6px; border-radius:var(--radius); border:1px solid var(--border); }
+  .day-tab { flex:1; padding:12px; border:none; background:transparent; border-radius:var(--radius-sm); cursor:pointer; font-family:'Noto Sans KR',sans-serif; font-size:13px; font-weight:500; color:var(--text-muted); transition:all .2s; }
+  .day-tab.active { background:var(--navy); color:#fff; box-shadow:0 2px 8px rgba(27,58,107,0.25); }
+  .day-tab:hover:not(.active) { background:var(--sky); color:var(--navy); }
+
+  /* 2일차 코스 */
+  .course-toggle { display:flex; gap:12px; margin-bottom:28px; }
+  .course-btn { flex:1; padding:14px; border:2px solid var(--border); background:var(--warm-white); border-radius:var(--radius); cursor:pointer; font-family:'Noto Sans KR',sans-serif; font-size:13px; font-weight:500; color:var(--text-muted); transition:all .2s; text-align:center; }
+  .course-btn.active-teal { border-color:var(--teal); background:var(--teal-bg); color:var(--teal); }
+  .course-btn.active-blue { border-color:var(--blue); background:var(--sky); color:var(--blue); }
+  .course-btn:hover:not(.active-teal):not(.active-blue) { border-color:var(--navy); color:var(--navy); }
+
+  /* 동선 흐름 */
+  .flow-bar { display:flex; align-items:center; gap:0; margin-bottom:28px; overflow-x:auto; padding:4px 0 8px; scrollbar-width:thin; }
+  .flow-stop { background:var(--navy); color:#fff; padding:10px 14px; border-radius:var(--radius-sm); font-size:11px; font-weight:500; white-space:nowrap; text-align:center; min-width:76px; line-height:1.4; }
+  .flow-stop.teal { background:var(--teal); }
+  .flow-stop.amber { background:var(--amber); }
+  .flow-stop.rose { background:var(--rose); }
+  .flow-stop.blue { background:var(--blue); }
+  .flow-arrow { color:var(--text-muted); font-size:14px; padding:0 4px; flex-shrink:0; }
+
+  /* 일정 카드 */
+  .schedule { display:flex; flex-direction:column; gap:12px; }
+  .sched-item { background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:box-shadow .2s; position:relative; }
+  .sched-item:hover { box-shadow:var(--shadow-hover); }
+  .sched-main { display:grid; grid-template-columns:90px 48px 1fr 190px; }
+
+  /* 시간 칸 */
+  .sched-time-col { background:#F0EDE8; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 8px; border-right:1px solid var(--border); gap:4px; }
+  .time-display { font-size:15px; font-weight:700; color:var(--navy); cursor:pointer; padding:3px 8px; border-radius:4px; transition:background .15s; border:1px solid transparent; text-align:center; white-space:nowrap; }
+  .time-display:hover { background:var(--sky); border-color:var(--blue); }
+  .time-input { font-size:14px; font-weight:700; color:var(--navy); font-family:'Noto Sans KR',sans-serif; width:68px; text-align:center; border:1px solid var(--blue); border-radius:4px; padding:3px 6px; background:white; display:none; outline:none; }
+
+  /* 아이콘 칸 */
+  .sched-icon-col { display:flex; align-items:center; justify-content:center; font-size:20px; border-right:1px solid var(--border); padding:0 4px; background:var(--warm-white); cursor:pointer; }
+  .sched-icon-col:hover { background:var(--sky); }
+
+  /* 내용 칸 */
+  .sched-content-col { padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+  .place-name { font-size:15px; font-weight:700; color:var(--navy); cursor:pointer; padding:2px 5px; border-radius:4px; border:1px solid transparent; display:inline-block; transition:background .15s; }
+  .place-name:hover { background:var(--sky); border-color:var(--blue); }
+  .place-name[contenteditable="true"] { background:white; border-color:var(--blue); outline:none; min-width:120px; }
+  .place-desc { font-size:13px; color:var(--text-muted); line-height:1.6; cursor:pointer; padding:2px 5px; border-radius:4px; border:1px solid transparent; transition:background .15s; }
+  .place-desc:hover { background:var(--sand); border-color:var(--border); }
+  .place-desc[contenteditable="true"] { background:white; border-color:var(--blue); outline:none; }
+  .place-tip { font-size:12px; color:var(--amber); font-weight:500; margin-top:2px; cursor:pointer; padding:2px 5px; border-radius:4px; border:1px solid transparent; transition:background .15s; }
+  .place-tip:hover { background:var(--amber-bg); border-color:var(--amber); }
+  .place-tip[contenteditable="true"] { background:var(--amber-bg); border-color:var(--amber); outline:none; }
+  .edit-hint { font-size:10px; color:#bbb; margin-top:2px; }
+
+  /* 사진 칸 */
+  .photo-col { border-left:1px solid var(--border); background:#F5F3EF; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:110px; cursor:pointer; transition:background .2s; position:relative; overflow:hidden; }
+  .photo-col:hover { background:var(--sky); }
+  .photo-col img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
+  .photo-placeholder { display:flex; flex-direction:column; align-items:center; gap:6px; z-index:1; pointer-events:none; }
+  .photo-placeholder span:first-child { font-size:22px; }
+  .photo-placeholder span:last-child { font-size:10px; color:var(--text-muted); text-align:center; line-height:1.4; }
+  .photo-delete { position:absolute; top:6px; right:6px; background:rgba(0,0,0,0.5); color:white; border:none; border-radius:50%; width:22px; height:22px; font-size:12px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:2; }
+  .photo-delete { display:flex !important; }
+  .photo-input { display:none; }
+
+  /* 삭제 버튼 */
+  .item-delete { position:absolute; top:8px; right:8px; background:none; border:none; color:#ccc; font-size:15px; cursor:pointer; padding:2px 6px; border-radius:4px; transition:all .15s; z-index:5; display:none; }
+  .sched-item:hover .item-delete { display:block; }
+  .item-delete:hover { background:var(--rose-bg); color:var(--rose); }
+
+  /* 추가 버튼 */
+  .add-item-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; border:2px dashed var(--border); background:transparent; border-radius:var(--radius); cursor:pointer; font-family:'Noto Sans KR',sans-serif; font-size:13px; color:var(--text-muted); transition:all .2s; margin-top:4px; }
+  .add-item-btn:hover { border-color:var(--navy); color:var(--navy); background:var(--sky); }
+
+  /* 섹션 라벨 */
+  .section-label { display:flex; align-items:center; gap:10px; margin-bottom:16px; margin-top:8px; }
+  .section-pill { padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:0.5px; color:white; }
+  .pill-navy { background:var(--navy); }
+  .pill-teal { background:var(--teal); }
+  .pill-amber { background:var(--amber); }
+  .pill-rose { background:var(--rose); }
+  .section-line { flex:1; height:1px; background:var(--border); }
+
+  /* 식당 선택 */
+  .meal-section { background:var(--warm-white); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:12px; }
+  .meal-title { font-size:13px; font-weight:700; color:var(--amber); margin-bottom:14px; }
+  .meal-options { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .meal-card { border:2px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; cursor:pointer; transition:all .2s; }
+  .meal-card.selected { border-color:var(--amber); }
+  .meal-card:hover { border-color:var(--amber); box-shadow:var(--shadow); }
+  .meal-photo { height:80px; background:#EEE; display:flex; align-items:center; justify-content:center; font-size:28px; cursor:pointer; position:relative; overflow:hidden; }
+  .meal-photo img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; }
+  .meal-info { padding:8px 10px; }
+  .meal-name { font-size:13px; font-weight:700; color:var(--navy); }
+  .meal-desc { font-size:11px; color:var(--text-muted); margin-top:2px; line-height:1.4; }
+  .meal-price { font-size:11px; color:var(--amber); font-weight:500; margin-top:4px; }
+  .meal-selected-badge { display:none; background:var(--amber); color:white; font-size:10px; font-weight:700; padding:2px 8px; border-radius:3px; margin-top:4px; }
+  .meal-card.selected .meal-selected-badge { display:inline-block; }
+  .meal-link-row { display:flex; align-items:center; gap:6px; margin-top:6px; padding-top:6px; border-top:1px solid var(--border); }
+  .meal-link-btn { font-size:11px; padding:2px 8px; border-radius:4px; text-decoration:none; font-weight:500; cursor:pointer; white-space:nowrap; transition:all .15s; font-family:'Noto Sans KR',sans-serif; border:1px solid; }
+  .meal-link-btn.has-link { background:var(--sky); color:var(--blue); border-color:var(--blue); }
+  .meal-link-btn.has-link:hover { background:var(--blue); color:white; }
+  .meal-link-btn.no-link { background:none; color:#bbb; border:1px dashed #ccc; }
+  .meal-link-btn.no-link:hover { background:var(--sky); color:var(--blue); border-color:var(--blue); }
+  .meal-link-edit { background:none; border:none; color:#aaa; cursor:pointer; font-size:12px; padding:1px 4px; border-radius:3px; }
+  .meal-link-edit:hover { background:var(--sky); color:var(--blue); }
+
+  /* 툴바 */
+  .toolbar { display:flex; gap:10px; justify-content:flex-end; margin-bottom:24px; }
+  .toolbar-btn { padding:9px 18px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--warm-white); font-family:'Noto Sans KR',sans-serif; font-size:12px; font-weight:500; cursor:pointer; color:var(--text); transition:all .15s; display:flex; align-items:center; gap:6px; }
+  .toolbar-btn:hover { background:var(--navy); color:white; border-color:var(--navy); }
+  .toolbar-btn.primary { background:var(--navy); color:white; border-color:var(--navy); }
+  .toolbar-btn.primary:hover { background:#142d57; }
+
+  /* 탭 패널 */
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+
+  /* 모달 */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:100; align-items:center; justify-content:center; }
+  .modal-overlay.open { display:flex; }
+  .modal { background:white; border-radius:var(--radius); padding:28px; width:380px; max-width:90vw; box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+  .modal h3 { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:18px; }
+  .modal label { font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px; margin-top:12px; }
+  .modal input, .modal textarea { width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-family:'Noto Sans KR',sans-serif; font-size:13px; color:var(--text); background:var(--warm-white); }
+  .modal input:focus, .modal textarea:focus { outline:none; border-color:var(--blue); }
+  .modal textarea { height:60px; resize:none; }
+  .modal-btns { display:flex; gap:8px; margin-top:20px; justify-content:flex-end; }
+  .modal-cancel { padding:9px 18px; border:1px solid var(--border); background:white; border-radius:var(--radius-sm); font-family:'Noto Sans KR',sans-serif; font-size:13px; cursor:pointer; }
+  .modal-confirm { padding:9px 18px; border:none; background:var(--navy); color:white; border-radius:var(--radius-sm); font-family:'Noto Sans KR',sans-serif; font-size:13px; cursor:pointer; font-weight:500; }
+
+  /* 장소명 + 링크 행 */
+  .place-name-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px; }
+  .link-btns { display:flex; align-items:center; gap:4px; flex-shrink:0; }
+  .google-link-btn { font-size:11px; padding:2px 8px; border-radius:4px; text-decoration:none; font-weight:500; cursor:pointer; white-space:nowrap; transition:all .15s; font-family:'Noto Sans KR',sans-serif; }
+  .google-link-btn.has-link { background:var(--sky); color:var(--blue); border:1px solid var(--blue); }
+  .google-link-btn.has-link:hover { background:var(--blue); color:white; }
+  .google-link-btn.no-link { background:none; color:#bbb; border:1px dashed #ccc; }
+  .google-link-btn.no-link:hover { background:var(--sky); color:var(--blue); border-color:var(--blue); }
+  .google-link-edit { background:none; border:none; color:#aaa; cursor:pointer; font-size:12px; padding:1px 4px; border-radius:3px; }
+  .google-link-edit:hover { background:var(--sky); color:var(--blue); }
+  /* 구글 링크 모달 */
+  #link-modal .modal { width:400px; }
+
+  @media print {
+    body { background:white; }
+    .toolbar, .day-tabs, .course-toggle, .add-item-btn, .item-delete, .photo-delete { display:none !important; }
+    .tab-panel { display:block !important; }
+    .container { padding:20px; }
+    .sched-item { break-inside:avoid; }
+  }
+  @media (max-width:640px) {
+    .sched-main { grid-template-columns:72px 40px 1fr 90px; }
+    .meal-options { grid-template-columns:1fr; }
+    .header-title { font-size:26px; }
+    .flow-stop { min-width:64px; font-size:10px; padding:8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p class="header-label">Family Trip Planner</p>
+  <h1 class="header-title">🌸 후쿠오카 여행 일정표</h1>
+  <p class="header-sub">2025년 4월 15일 (화) — 4월 17일 (목) &nbsp;·&nbsp; 2박 3일</p>
+  <div class="header-badges">
+    <span class="header-badge">✈ Air Seoul</span>
+    <span class="header-badge">🏨 더 브렉퍼스트 호텔 텐진 · 미쓰이 가든 기온</span>
+    <span class="header-badge">👩‍👧 모녀여행</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="toolbar">
+    <button class="toolbar-btn" onclick="window.print()">🖨 인쇄하기</button>
+    <button class="toolbar-btn primary" id="save-btn" onclick="saveData()">💾 저장 & 다운로드</button>
+  </div>
+
+  <div class="day-tabs">
+    <button class="day-tab active" onclick="showDay(0)">📅 1일차 &nbsp;4월 15일</button>
+    <button class="day-tab" onclick="showDay(1)">📅 2일차 &nbsp;4월 16일</button>
+    <button class="day-tab" onclick="showDay(2)">📅 3일차 &nbsp;4월 17일</button>
+  </div>
+
+  <!-- 1일차 -->
+  <div class="tab-panel active" id="day-0">
+    <div class="section-label">
+      <span class="section-pill pill-navy">도착 &amp; 첫날 저녁</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="flow-bar">
+      <div class="flow-stop">✈<br>16:00<br>공항도착</div><span class="flow-arrow">›</span>
+      <div class="flow-stop blue">🏨<br>17:00<br>호텔체크인</div><span class="flow-arrow">›</span>
+      <div class="flow-stop teal">🍜<br>18:30<br>이치란라멘</div><span class="flow-arrow">›</span>
+      <div class="flow-stop amber">🛍<br>20:00<br>텐진쇼핑</div><span class="flow-arrow">›</span>
+      <div class="flow-stop rose">🏮<br>21:30<br>나카스포장마차</div>
+    </div>
+    <div class="schedule" id="sched-day1"></div>
+    <button class="add-item-btn" onclick="openAddModal('day1')">＋ 일정 추가</button>
+  </div>
+
+  <!-- 2일차 -->
+  <div class="tab-panel" id="day-1">
+    <div class="course-toggle">
+      <button class="course-btn active-teal" id="course-a-btn" onclick="showCourse('a')">
+        🌿 1안 · 오호리공원 + 롯폰마츠<br><small style="font-weight:400;font-size:11px;">여유로운 도심 산책 코스</small>
+      </button>
+      <button class="course-btn" id="course-b-btn" onclick="showCourse('b')">
+        🌸 2안 · 우미노나카미치<br><small style="font-weight:400;font-size:11px;">네모필라 꽃밭 + 자연 코스</small>
+      </button>
+    </div>
+
+    <div id="course-a">
+      <div class="section-label">
+        <span class="section-pill pill-teal">1안 동선</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-stop teal">🌿<br>09:00<br>오호리공원</div><span class="flow-arrow">›</span>
+        <div class="flow-stop teal">☕<br>10:30<br>롯폰마츠</div><span class="flow-arrow">›</span>
+        <div class="flow-stop amber">🍱<br>12:00<br>텐진점심</div><span class="flow-arrow">›</span>
+        <div class="flow-stop blue">🛍<br>13:30<br>텐진쇼핑</div><span class="flow-arrow">›</span>
+        <div class="flow-stop rose">🌅<br>17:00<br>모모치해변</div><span class="flow-arrow">›</span>
+        <div class="flow-stop">🥘<br>19:30<br>모츠나베</div>
+      </div>
+      <div class="schedule" id="sched-day2a"></div>
+      <button class="add-item-btn" onclick="openAddModal('day2a')">＋ 일정 추가</button>
+    </div>
+
+    <div id="course-b" style="display:none;">
+      <div class="section-label">
+        <span class="section-pill pill-navy">2안 동선</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-stop">🚉<br>09:00<br>텐진출발</div><span class="flow-arrow">›</span>
+        <div class="flow-stop teal">🌸<br>09:40<br>우미노나카미치</div><span class="flow-arrow">›</span>
+        <div class="flow-stop amber">🍱<br>13:20<br>텐진점심</div><span class="flow-arrow">›</span>
+        <div class="flow-stop blue">🛍<br>14:30<br>텐진쇼핑</div><span class="flow-arrow">›</span>
+        <div class="flow-stop rose">🌅<br>17:00<br>모모치해변</div><span class="flow-arrow">›</span>
+        <div class="flow-stop">🥘<br>19:30<br>모츠나베</div>
+      </div>
+      <div class="schedule" id="sched-day2b"></div>
+      <button class="add-item-btn" onclick="openAddModal('day2b')">＋ 일정 추가</button>
+    </div>
+
+    <!-- 점심 선택 -->
+    <div class="meal-section" style="margin-top:28px;">
+      <div class="meal-title">🍱 점심 선택하기 — 탭해서 결정!</div>
+      <div class="meal-options">
+        <div class="meal-card" id="meal-0" onclick="selectMeal(0)">
+          <div class="meal-photo" onclick="triggerMealPhoto(event,0)">🥩<img id="meal-photo-0" style="display:none"><button class="meal-photo-del" onclick="deleteMealPhoto(event,0)" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.5);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">✕</button></div>
+          <div class="meal-info">
+            <div class="meal-name">규카츠</div>
+            <div class="meal-desc">소고기 커틀릿. 화로에 직접 굽는 방식</div>
+            <div class="meal-price">1,500~2,000엔</div>
+            <div class="meal-selected-badge">✓ 선택됨</div>
+            <div class="meal-link-row" id="meal-link-row-0">
+              <button class="meal-link-btn no-link" id="meal-link-init-0">+ 구글 링크</button>
+            </div>
+          </div>
+        </div>
+        <div class="meal-card" id="meal-1" onclick="selectMeal(1)">
+          <div class="meal-photo" onclick="triggerMealPhoto(event,1)">🐟<img id="meal-photo-1" style="display:none"><button class="meal-photo-del" onclick="deleteMealPhoto(event,1)" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.5);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">✕</button></div>
+          <div class="meal-info">
+            <div class="meal-name">카이센동</div>
+            <div class="meal-desc">신선한 해산물 회 덮밥</div>
+            <div class="meal-price">1,500~2,500엔</div>
+            <div class="meal-selected-badge">✓ 선택됨</div>
+            <div class="meal-link-row" id="meal-link-row-1">
+              <button class="meal-link-btn no-link" id="meal-link-init-1">+ 구글 링크</button>
+            </div>
+          </div>
+        </div>
+        <div class="meal-card" id="meal-2" onclick="selectMeal(2)">
+          <div class="meal-photo" onclick="triggerMealPhoto(event,2)">🍤<img id="meal-photo-2" style="display:none"><button class="meal-photo-del" onclick="deleteMealPhoto(event,2)" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.5);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">✕</button></div>
+          <div class="meal-info">
+            <div class="meal-name">텐동</div>
+            <div class="meal-desc">새우·채소 튀김 덮밥</div>
+            <div class="meal-price">1,000~1,500엔</div>
+            <div class="meal-selected-badge">✓ 선택됨</div>
+            <div class="meal-link-row" id="meal-link-row-2">
+              <button class="meal-link-btn no-link" id="meal-link-init-2">+ 구글 링크</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="file" id="meal-file-input" accept="image/*" style="display:none">
+    </div>
+  </div>
+
+  <!-- 3일차 -->
+  <div class="tab-panel" id="day-2">
+    <div class="section-label">
+      <span class="section-pill pill-rose">마지막 날 · 귀국</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="flow-bar">
+      <div class="flow-stop teal">🌅<br>아침<br>조식</div><span class="flow-arrow">›</span>
+      <div class="flow-stop blue">🛍<br>오전<br>마지막쇼핑</div><span class="flow-arrow">›</span>
+      <div class="flow-stop amber">✈<br>오후<br>공항이동</div><span class="flow-arrow">›</span>
+      <div class="flow-stop rose">🏠<br>저녁<br>귀국</div>
+    </div>
+    <div class="schedule" id="sched-day3"></div>
+    <button class="add-item-btn" onclick="openAddModal('day3')">＋ 일정 추가</button>
+  </div>
+</div>
+
+<!-- 모달 -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <h3>➕ 일정 추가</h3>
+    <label>시간</label>
+    <input type="text" id="modal-time" placeholder="예: 14:00">
+    <label>아이콘 (이모지 1개)</label>
+    <input type="text" id="modal-icon" placeholder="예: 🍣" maxlength="4">
+    <label>장소 / 활동</label>
+    <input type="text" id="modal-place" placeholder="예: 하카타 어시장">
+    <label>설명</label>
+    <textarea id="modal-desc" placeholder="예: 신선한 해산물 가득한 아침 시장"></textarea>
+    <label>팁 (선택)</label>
+    <input type="text" id="modal-tip" placeholder="예: 💡 아침 일찍 가야 신선해요">
+    <label>구글 링크 (선택)</label>
+    <input type="text" id="modal-google" placeholder="구글 지도 URL (선택사항)">
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">취소</button>
+      <button class="modal-confirm" onclick="confirmAdd()">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const defaultData = {
+  day1: [
+    {time:'16:00',icon:'✈',place:'후쿠오카 공항 도착',desc:'입국 심사 후 지하철로 호텔 이동',tip:'💡 공항 → 텐진역 지하철 약 10분 (공항선)'},
+    {time:'17:00',icon:'🏨',place:'더 브렉퍼스트 호텔 텐진',desc:'체크인 & 짐 정리',tip:'💡 텐진역에서 도보 5분 이내'},
+    {time:'18:30',icon:'🍜',place:'이치란라멘 텐진점',desc:'개인 칸막이 1인 라멘 원조 맛집. 진한 돈코츠 국물',tip:'💡 줄 서는 경우 있으니 조금 여유있게 이동'},
+    {time:'20:00',icon:'🛍',place:'텐진 쇼핑',desc:'비비안 웨스트우드 · 몽벨 · 돈키호테',tip:'💡 돈키호테는 밤 늦게까지 운영'},
+    {time:'21:30',icon:'🏮',place:'나카스 포장마차 거리',desc:'후쿠오카 명물 포장마차에서 야식. 야키토리 · 라멘 · 오뎅',tip:'💡 택시로 이동 약 10분 / 1인도 환영'},
+  ],
+  day2a: [
+    {time:'09:00',icon:'🌿',place:'오호리 공원 산책',desc:'후쿠오카 도심 속 대형 호수 공원. 아침 산책 최적',tip:'💡 호텔에서 도보 약 15분'},
+    {time:'10:30',icon:'☕',place:'롯폰마츠 카페 & 거리 구경',desc:'감각적인 카페와 편집숍이 모인 조용한 동네',tip:'💡 오호리공원에서 도보 10분'},
+    {time:'12:00',icon:'🍱',place:'텐진 점심',desc:'규카츠 / 카이센동 / 텐동 중 선택',tip:'💡 지하철 약 10분 / 텐진역 주변 식당가'},
+    {time:'13:30',icon:'🛍',place:'텐진 쇼핑',desc:'GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)',tip:'💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분'},
+    {time:'17:00',icon:'🌅',place:'모모치해변',desc:'일몰 18:49 — 서쪽 방향 노을 명소',tip:'💡 텐진에서 버스 약 20분. 17:30 이전 출발 권장'},
+    {time:'19:30',icon:'🥘',place:'모츠나베',desc:'후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!',tip:'💡 텐진·나카스 주변 전문점. 1인 약 3,000엔'},
+  ],
+  day2b: [
+    {time:'09:00',icon:'🚉',place:'텐진역 출발',desc:'지하철 공항선 → 하카타역 → JR 가시이선 환승',tip:'💡 환승 1회 / 총 소요시간 약 40~50분'},
+    {time:'09:40',icon:'🌸',place:'우미노나카미치 해변공원 입장',desc:'4월 네모필라 꽃밭 + 벚꽃 동시 절정. 입장료 450엔',tip:'💡 자전거 대여 강력 추천 (600엔/3시간)'},
+    {time:'10:00',icon:'🚲',place:'자전거로 공원 투어',desc:'꽃밭 언덕 → 동물원 → 바다 전망 산책로',tip:'💡 공원이 넓어서 자전거 없이는 다 못 돌아봐요'},
+    {time:'12:00',icon:'🐒',place:'동물원 & 피크닉 (선택)',desc:'카피바라, 다람쥐원숭이 등 귀여운 동물 구역',tip:'💡 잔디밭에서 도시락 먹어도 좋아요'},
+    {time:'12:30',icon:'🚉',place:'공원 출발 → 텐진 복귀',desc:'JR 우미노나카미치역 → 하카타 → 텐진 (약 50분)',tip:'💡 공원 마감 17:30 전 퇴장 필수'},
+    {time:'13:20',icon:'🍱',place:'텐진 점심',desc:'규카츠 / 카이센동 / 텐동 중 선택',tip:'💡 텐진역 주변 식당가'},
+    {time:'14:30',icon:'🛍',place:'텐진 쇼핑',desc:'GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)',tip:'💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분'},
+    {time:'17:00',icon:'🌅',place:'모모치해변 (시간 여유 시)',desc:'일몰 18:49 — 노을 명소. 쇼핑 후 바로 이동',tip:'💡 텐진에서 버스 약 20분 / 306번 버스'},
+    {time:'19:30',icon:'🥘',place:'모츠나베',desc:'후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!',tip:'💡 텐진·나카스 전문점 / 1인 약 3,000엔'},
+  ],
+  day3: [
+    {time:'08:00',icon:'☀',place:'조식 & 체크아웃',desc:'미쓰이 가든 기온 체크아웃 후 짐 맡기기',tip:'💡 체크아웃 시간 11:00 전 확인'},
+    {time:'09:30',icon:'🛍',place:'마지막 쇼핑',desc:'못 산 것 마지막으로 둘러보기 · 기념품 구매',tip:'💡 공항 면세점보다 시내가 저렴한 경우 많음'},
+    {time:'12:00',icon:'🍜',place:'마지막 점심',desc:'후쿠오카에서 못 먹은 것 한 번 더',tip:'💡 하카타 라멘 / 야키토리 추천'},
+    {time:'14:00',icon:'✈',place:'후쿠오카 공항 이동',desc:'지하철 공항선으로 약 10분',tip:'💡 공항 2시간 전 도착 권장'},
+  ]
+};
+
+let schedData = JSON.parse(JSON.stringify(defaultData));
+let currentAddTarget = null;
+let currentMealPhotoIdx = null;
+
+// ── 렌더링 ──
+function renderSchedule(key, containerId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  (schedData[key] || []).forEach((item, idx) => c.appendChild(createItem(item, key, idx)));
+}
+
+function createItem(item, key, idx) {
+  const div = document.createElement('div');
+  div.className = 'sched-item';
+  div.dataset.schedKey = key;
+  div.dataset.schedIdx = idx;
+
+  const tipText = item.tip || '';
+  const googleUrl = item.googleUrl || '';
+  // 버튼 HTML은 href 포함 정적으로만, 이벤트는 아래에서 addEventListener로 바인딩
+  const linkBtnHTML = googleUrl
+    ? `<a class="google-link-btn has-link" href="${escH(googleUrl)}" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button>`
+    : `<button class="google-link-btn no-link">+ 구글 링크</button>`;
+
+  div.innerHTML = `
+    <button class="item-delete" onclick="deleteItem('${key}',${idx})" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">${escH(item.time)}</span>
+        <input class="time-input" type="text" value="${escH(item.time)}">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">${escH(item.icon)}</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">${escH(item.place)}</span>
+          <span class="link-btns">${linkBtnHTML}</span>
+        </div>
+        <span class="place-desc editable" data-field="desc">${escH(item.desc)}</span>
+        <span class="place-tip editable" data-field="tip" ${!tipText ? 'style="color:#bbb;font-size:11px"' : ''}>${escH(tipText) || '+ 팁 추가'}</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div>`;
+
+  // 시간 클릭 → input 전환
+  const timeDisplay = div.querySelector('.time-display');
+  const timeInput = div.querySelector('.time-input');
+  timeDisplay.addEventListener('click', () => {
+    timeDisplay.style.display = 'none';
+    timeInput.style.display = 'block';
+    timeInput.focus(); timeInput.select();
+  });
+  const finishTime = () => {
+    const val = timeInput.value.trim() || schedData[key][idx].time;
+    schedData[key][idx].time = val;
+    schedData[key].sort((a,b) => timeToMin(a.time) - timeToMin(b.time));
+    renderSchedule(key, 'sched-' + key);
+  };
+  timeInput.addEventListener('blur', finishTime);
+  timeInput.addEventListener('keydown', e => { if(e.key==='Enter') timeInput.blur(); });
+
+  // 아이콘 클릭
+  div.querySelector('.sched-icon-col').addEventListener('click', () => {
+    const v = prompt('새 이모지를 입력하세요:', schedData[key][idx].icon);
+    if (v && v.trim()) { schedData[key][idx].icon = v.trim(); div.querySelector('.sched-icon-col').textContent = v.trim(); }
+  });
+
+  // 텍스트 인라인 편집 (editable span들)
+  div.querySelectorAll('.editable').forEach(span => {
+    span.addEventListener('click', () => {
+      if (span.dataset.editing) return;
+      span.dataset.editing = '1';
+      const field = span.dataset.field;
+      const cur = schedData[key][idx][field] || '';
+      const isTip = field === 'tip';
+      const displayVal = (isTip && !cur) ? '' : span.textContent;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = (isTip && span.style.color === 'rgb(187, 187, 187)') ? '' : displayVal;
+      input.style.cssText = 'width:100%;padding:3px 6px;border:1px solid var(--blue);border-radius:4px;font-family:inherit;font-size:inherit;color:var(--navy);background:white;outline:none;';
+      if (field === 'desc') input.style.fontSize = '13px';
+      if (field === 'tip') input.style.fontSize = '12px';
+      span.replaceWith(input);
+      input.focus(); input.select();
+
+      const finish = () => {
+        const newVal = input.value.trim();
+        schedData[key][idx][field] = newVal;
+        const newSpan = document.createElement('span');
+        newSpan.className = span.className;
+        newSpan.dataset.field = field;
+        if (field === 'tip' && !newVal) {
+          newSpan.style.color = '#bbb'; newSpan.style.fontSize = '11px';
+          newSpan.textContent = '+ 팁 추가';
+        } else {
+          newSpan.style.color = ''; newSpan.style.fontSize = '';
+          newSpan.textContent = newVal || (field === 'tip' ? '+ 팁 추가' : '');
+        }
+        newSpan.addEventListener('click', span.cloneNode(false).onclick); // reattach via renderSchedule instead
+        input.replaceWith(newSpan);
+        delete newSpan.dataset.editing;
+        // re-attach click listener
+        newSpan.addEventListener('click', () => newSpan.click && newSpan.dispatchEvent(new MouseEvent('click')));
+        attachEditable(newSpan, key, idx);
+      };
+      input.addEventListener('blur', finish);
+      input.addEventListener('keydown', e => { if(e.key==='Enter') input.blur(); if(e.key==='Escape') { input.value = schedData[key][idx][field]||''; input.blur(); } });
+    });
+  });
+
+  // 구글 링크 버튼 이벤트 바인딩
+  const linkBtnsSpan = div.querySelector('.link-btns');
+  if (linkBtnsSpan) rebindLinkBtns(linkBtnsSpan, key, idx);
+
+  // 저장된 사진 복원
+  if (item._photo) {
+    const col = div.querySelector('.photo-col');
+    col.querySelector('.photo-placeholder').style.display = 'none';
+    let img = col.querySelector('img');
+    if (!img) { img = document.createElement('img'); col.appendChild(img); }
+    img.src = item._photo; img.style.display = 'block';
+  }
+
+  // 사진 클릭
+  const photoCol = div.querySelector('.photo-col');
+  const photoInput = div.querySelector('.photo-input');
+  photoCol.addEventListener('click', e => { if(e.target.classList.contains('photo-delete')) return; photoInput.click(); });
+  photoInput.addEventListener('change', () => loadPhoto(photoInput));
+
+  return div;
+}
+
+function attachEditable(span, key, idx) {
+  span.addEventListener('click', () => {
+    if (span.dataset.editing) return;
+    span.dataset.editing = '1';
+    const field = span.dataset.field;
+    const cur = schedData[key][idx][field] || '';
+    const isTip = field === 'tip';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = (isTip && !cur) ? '' : (span.style.color === 'rgb(187, 187, 187)' ? '' : span.textContent);
+    input.style.cssText = 'width:100%;padding:3px 6px;border:1px solid var(--blue);border-radius:4px;font-family:inherit;font-size:inherit;color:var(--navy);background:white;outline:none;';
+    if (field === 'desc') input.style.fontSize = '13px';
+    if (field === 'tip') input.style.fontSize = '12px';
+    span.replaceWith(input);
+    input.focus(); input.select();
+
+    const finish = () => {
+      const newVal = input.value.trim();
+      schedData[key][idx][field] = newVal;
+      const newSpan = document.createElement('span');
+      newSpan.className = span.className;
+      newSpan.dataset.field = field;
+      if (field === 'tip' && !newVal) {
+        newSpan.style.color = '#bbb'; newSpan.style.fontSize = '11px';
+        newSpan.textContent = '+ 팁 추가';
+      } else {
+        newSpan.style.color = ''; newSpan.style.fontSize = '';
+        newSpan.textContent = newVal || (field === 'tip' ? '+ 팁 추가' : '');
+      }
+      input.replaceWith(newSpan);
+      delete newSpan.dataset.editing;
+      attachEditable(newSpan, key, idx);
+    };
+    input.addEventListener('blur', finish);
+    input.addEventListener('keydown', e => {
+      if(e.key==='Enter') input.blur();
+      if(e.key==='Escape') { schedData[key][idx][field] = schedData[key][idx][field]; input.blur(); }
+    });
+  });
+}
+
+function escH(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderAll() {
+  renderSchedule('day1','sched-day1');
+  renderSchedule('day2a','sched-day2a');
+  renderSchedule('day2b','sched-day2b');
+  renderSchedule('day3','sched-day3');
+}
+
+// ── 탭 전환 ──
+function showDay(idx) {
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+}
+
+function showCourse(c) {
+  document.getElementById('course-a').style.display = c==='a' ? 'block' : 'none';
+  document.getElementById('course-b').style.display = c==='b' ? 'block' : 'none';
+  document.getElementById('course-a-btn').className = 'course-btn' + (c==='a' ? ' active-teal' : '');
+  document.getElementById('course-b-btn').className = 'course-btn' + (c==='b' ? ' active-blue' : '');
+}
+
+// ── timeToMin (정렬용) ──
+function timeToMin(t) {
+  if (!t) return 0;
+  const m = t.match(/^(\d{1,2}):(\d{2})$/);
+  if (m) return parseInt(m[1])*60 + parseInt(m[2]);
+  const specials = {'아침':0,'오전':30,'점심':720,'오후':780,'저녁':1080,'밤':1140,'야식':1200};
+  return specials[t.trim()] ?? 0;
+}
+
+// ── 사진 ──
+function triggerPhoto(col) { col.querySelector('.photo-input').click(); }
+function loadPhoto(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const b64 = e.target.result;
+    const col = input.closest('.photo-col');
+    col.querySelector('.photo-placeholder').style.display = 'none';
+    let img = col.querySelector('img');
+    if (!img) { img = document.createElement('img'); col.appendChild(img); }
+    img.src = b64; img.style.display = 'block';
+    // schedData에도 저장
+    const item = col.closest('.sched-item');
+    if (item) {
+      const key = item.dataset.schedKey;
+      const idx = parseInt(item.dataset.schedIdx);
+      if (key && !isNaN(idx) && schedData[key] && schedData[key][idx]) {
+        schedData[key][idx]._photo = b64;
+      }
+    }
+  };
+  reader.readAsDataURL(file);
+}
+function deletePhoto(e, btn) {
+  e.stopPropagation();
+  const col = btn.closest('.photo-col');
+  const img = col.querySelector('img');
+  if (img) { img.style.display = 'none'; img.src = ''; }
+  col.querySelector('.photo-placeholder').style.display = 'flex';
+  const item = col.closest('.sched-item');
+  if (item) {
+    const key = item.dataset.schedKey;
+    const idx = parseInt(item.dataset.schedIdx);
+    if (key && !isNaN(idx) && schedData[key] && schedData[key][idx]) {
+      delete schedData[key][idx]._photo;
+    }
+  }
+}
+
+// ── 식당 사진 ──
+function triggerMealPhoto(e, idx) {
+  e.stopPropagation(); currentMealPhotoIdx = idx;
+  document.getElementById('meal-file-input').click();
+}
+const mealPhotos = ['', '', ''];
+document.getElementById('meal-file-input').addEventListener('change', function() {
+  const file = this.files[0]; if (!file || currentMealPhotoIdx === null) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const b64 = e.target.result;
+    mealPhotos[currentMealPhotoIdx] = b64;
+    const img = document.getElementById('meal-photo-' + currentMealPhotoIdx);
+    img.src = b64; img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+// ── 삭제 ──
+function deleteItem(key, idx) {
+  if (!confirm('이 일정을 삭제할까요?')) return;
+  schedData[key].splice(idx, 1);
+  renderSchedule(key, 'sched-' + key);
+}
+
+// ── 추가 모달 ──
+function openAddModal(key) {
+  currentAddTarget = key;
+  ['modal-time','modal-icon','modal-place','modal-desc','modal-tip'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('add-modal').classList.add('open');
+  document.getElementById('modal-time').focus();
+}
+function closeModal() { document.getElementById('add-modal').classList.remove('open'); }
+function confirmAdd() {
+  const item = {
+    time:  document.getElementById('modal-time').value.trim()  || '00:00',
+    icon:  document.getElementById('modal-icon').value.trim()  || '📌',
+    place: document.getElementById('modal-place').value.trim() || '새 일정',
+    desc:  document.getElementById('modal-desc').value.trim()  || '',
+    tip:   document.getElementById('modal-tip').value.trim()   || '',
+    googleUrl: document.getElementById('modal-google').value.trim() || '',
+  };
+  if (!schedData[currentAddTarget]) schedData[currentAddTarget] = [];
+  schedData[currentAddTarget].push(item);
+  schedData[currentAddTarget].sort((a,b) => timeToMin(a.time) - timeToMin(b.time));
+  renderSchedule(currentAddTarget, 'sched-' + currentAddTarget);
+  closeModal();
+}
+document.getElementById('add-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('add-modal')) closeModal();
+});
+
+// ── 점심 선택 ──
+function selectMeal(idx) {
+  document.querySelectorAll('.meal-card').forEach((c,i) => c.classList.toggle('selected', i===idx));
+}
+
+// ── 식당 사진 삭제 ──
+function deleteMealPhoto(e, idx) {
+  e.stopPropagation();
+  mealPhotos[idx] = '';
+  const img = document.getElementById('meal-photo-' + idx);
+  if (img) { img.src = ''; img.style.display = 'none'; }
+}
+
+// ── 식당 구글 링크 ──
+const mealLinks = ['', '', '']; // 각 식당의 URL 저장
+let mealLinkTarget = null; // 현재 편집 중인 식당 index
+
+function editMealLink(e, idx) {
+  e.stopPropagation();
+  mealLinkTarget = idx;
+  document.getElementById('link-input').value = mealLinks[idx] || '';
+  document.getElementById('link-modal').classList.add('open');
+  setTimeout(() => document.getElementById('link-input').focus(), 50);
+}
+
+function confirmMealLink() {
+  if (mealLinkTarget === null) return;
+  const url = document.getElementById('link-input').value.trim();
+  const savedIdx = mealLinkTarget; // 클로저용 고정
+  mealLinks[savedIdx] = url;
+  renderMealLinkRow(savedIdx, url);
+  mealLinkTarget = null;
+  closeLinkModal();
+}
+
+function renderMealLinkRow(idx, url) {
+  const row = document.getElementById('meal-link-row-' + idx);
+  if (!row) return;
+  row.innerHTML = ''; // 기존 내용 비우기
+  if (url) {
+    const a = document.createElement('a');
+    a.className = 'meal-link-btn has-link';
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = '🗺 지도';
+    a.addEventListener('click', e => e.stopPropagation());
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'meal-link-edit';
+    editBtn.textContent = '✎';
+    editBtn.addEventListener('click', e => editMealLink(e, idx));
+
+    row.appendChild(a);
+    row.appendChild(editBtn);
+  } else {
+    const btn = document.createElement('button');
+    btn.className = 'meal-link-btn no-link';
+    btn.textContent = '+ 구글 링크';
+    btn.addEventListener('click', e => editMealLink(e, idx));
+    row.appendChild(btn);
+  }
+}
+
+// ── 구글 링크 ──
+// linkTarget: { item: schedData 객체 직접 참조, linkSpan: DOM span }
+let linkTarget = null;
+
+function editGoogleLink(key, idx, linkSpan) {
+  const item = schedData[key][idx];
+  linkTarget = { item, linkSpan, key, idx };
+  document.getElementById('link-input').value = item.googleUrl || '';
+  document.getElementById('link-modal').classList.add('open');
+  setTimeout(() => document.getElementById('link-input').focus(), 50);
+}
+
+function closeLinkModal() {
+  document.getElementById('link-modal').classList.remove('open');
+  linkTarget = null;
+}
+
+function confirmLink() {
+  // 식당 링크 모달인 경우 분기
+  if (mealLinkTarget !== null) { confirmMealLink(); return; }
+  if (!linkTarget) return;
+  const url = document.getElementById('link-input').value.trim();
+  // 1) 데이터 저장
+  linkTarget.item.googleUrl = url;
+  // 2) DOM에서 링크 버튼 span만 직접 교체 (리렌더 없이)
+  const span = linkTarget.linkSpan;
+  if (span) {
+    const { key, idx } = linkTarget;
+    span.innerHTML = buildLinkBtnHTML(url, key, idx, span);
+    rebindLinkBtns(span, key, idx);
+  }
+  closeLinkModal();
+}
+
+// linkBtnHTML 생성 헬퍼
+function buildLinkBtnHTML(url, key, idx) {
+  if (url) {
+    return `<a class="google-link-btn has-link" href="${escH(url)}" target="_blank" rel="noopener">🗺 지도</a>`
+         + `<button class="google-link-edit">✎</button>`;
+  }
+  return `<button class="google-link-btn no-link">+ 구글 링크</button>`;
+}
+
+// 버튼 클릭 이벤트를 DOM 업데이트 후 다시 바인딩
+function rebindLinkBtns(span, key, idx) {
+  const noLinkBtn = span.querySelector('.google-link-btn.no-link');
+  const editBtn   = span.querySelector('.google-link-edit');
+  const openCb = (e) => { e.stopPropagation(); editGoogleLink(key, idx, span); };
+  if (noLinkBtn) noLinkBtn.addEventListener('click', openCb);
+  if (editBtn)   editBtn.addEventListener('click', openCb);
+}
+
+function openGoogleSearch() {
+  if (mealLinkTarget !== null) {
+    const names = ['규카츠 후쿠오카 맛집', '카이센동 후쿠오카 맛집', '텐동 후쿠오카 맛집'];
+    window.open('https://www.google.com/search?q=' + encodeURIComponent(names[mealLinkTarget] || '후쿠오카 맛집'), '_blank');
+    return;
+  }
+  if (!linkTarget) return;
+  const place = linkTarget.item.place || '';
+  window.open('https://www.google.com/search?q=' + encodeURIComponent(place + ' 후쿠오카'), '_blank');
+}
+
+function clearLinkInput() {
+  document.getElementById('link-input').value = '';
+}
+
+document.addEventListener('click', e => {
+  const lm = document.getElementById('link-modal');
+  if (e.target === lm) closeLinkModal();
+});
+
+// ── 저장: HTML 파일로 다운로드 ──
+function saveData() {
+  const btn = document.getElementById('save-btn');
+  btn.textContent = '⏳ 저장 중...';
+  try {
+    // 현재 HTML 소스 가져오기
+    const src = document.documentElement.outerHTML;
+    // schedData(이미지 포함), mealLinks, mealPhotos를 JSON으로 직렬화
+    const snapshot = JSON.stringify({ schedData, mealLinks, mealPhotos });
+    const escaped = snapshot.replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$\{/g,'\\${');
+    // 초기화 코드를 스냅샷으로 교체
+    const injected = src.replace(
+      /\/\/ ──SNAPSHOT_START──[\s\S]*?\/\/ ──SNAPSHOT_END──/,
+      ''
+    ).replace(
+      'loadSaved();',
+      `// ──SNAPSHOT_START──
+const _snap = ${snapshot};
+schedData = _snap.schedData;
+if(_snap.mealLinks) _snap.mealLinks.forEach((u,i)=>{ mealLinks[i]=u; if(u) renderMealLinkRow(i,u); });
+if(_snap.mealPhotos) _snap.mealPhotos.forEach((p,i)=>{ if(p){ mealPhotos[i]=p; const img=document.getElementById('meal-photo-'+i); if(img){img.src=p;img.style.display='block';} } });
+// ──SNAPSHOT_END──
+loadSaved();`
+    );
+    const blob = new Blob([injected], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '후쿠오카_여행일정표.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    btn.textContent = '✓ 다운로드 완료!';
+    setTimeout(() => { btn.textContent = '💾 저장하기'; }, 2500);
+  } catch(err) {
+    console.error(err);
+    btn.textContent = '💾 저장하기';
+    alert('저장 실패: ' + err.message);
+  }
+}
+function loadSaved() {
+  // 파일 기반 저장이므로 localStorage 불필요 — 하위호환용으로만 유지
+  try {
+    const s = localStorage.getItem('fukuoka_trip_v2');
+    if (s) { const d = JSON.parse(s); if(d && !window._snap) schedData = d; }
+  } catch(e) {}
+}
+
+loadSaved();
+renderAll();
+// 식당 링크 버튼 초기 이벤트 바인딩
+[0,1,2].forEach(idx => {
+  const btn = document.getElementById('meal-link-init-' + idx);
+  if (btn) btn.addEventListener('click', e => editMealLink(e, idx));
+});
+</script>
+
+<!-- 구글 링크 모달 -->
+<div class="modal-overlay" id="link-modal">
+  <div class="modal">
+    <h3>🗺 구글 링크 추가</h3>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">구글 지도 또는 구글 검색 링크를 붙여넣어 주세요.<br>구글 지도에서 장소 찾은 후 공유 → 링크 복사</p>
+    <label>링크 URL</label>
+    <input type="text" id="link-input" placeholder="https://maps.google.com/...">
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="google-link-btn has-link" onclick="openGoogleSearch()" style="font-size:11px;">🔍 구글에서 직접 검색하기</button>
+      <button class="google-link-btn no-link" onclick="clearLinkInput()" style="font-size:11px;border-style:solid;">링크 삭제</button>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeLinkModal()">취소</button>
+      <button class="modal-confirm" onclick="confirmLink()">저장</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
