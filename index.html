@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>후쿠오카 여행 일정표 🌸</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #1B3A6B;
@@ -214,17 +212,17 @@
 <div class="container">
   <div class="toolbar">
     <button class="toolbar-btn" onclick="window.print()">🖨 인쇄하기</button>
-    <button class="toolbar-btn primary" id="save-btn" onclick="saveData()">💾 저장 & 다운로드</button>
+    <button class="toolbar-btn primary" id="save-btn" onclick="saveData()">⏳ 저장 중...</button>
   </div>
 
   <div class="day-tabs">
-    <button class="day-tab active" onclick="showDay(0)">📅 1일차 &nbsp;4월 15일</button>
+    <button class="day-tab" onclick="showDay(0)">📅 1일차 &nbsp;4월 15일</button>
     <button class="day-tab" onclick="showDay(1)">📅 2일차 &nbsp;4월 16일</button>
-    <button class="day-tab" onclick="showDay(2)">📅 3일차 &nbsp;4월 17일</button>
+    <button class="day-tab active" onclick="showDay(2)">📅 3일차 &nbsp;4월 17일</button>
   </div>
 
   <!-- 1일차 -->
-  <div class="tab-panel active" id="day-0">
+  <div class="tab-panel" id="day-0">
     <div class="section-label">
       <span class="section-pill pill-navy">도착 &amp; 첫날 저녁</span>
       <div class="section-line"></div>
@@ -236,22 +234,132 @@
       <div class="flow-stop amber">🛍<br>20:00<br>텐진쇼핑</div><span class="flow-arrow">›</span>
       <div class="flow-stop rose">🏮<br>21:30<br>나카스포장마차</div>
     </div>
-    <div class="schedule" id="sched-day1"></div>
+    <div class="schedule" id="sched-day1"><div class="sched-item" data-sched-key="day1" data-sched-idx="0">
+    <button class="item-delete" onclick="deleteItem('day1',0)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">16:00</span>
+        <input class="time-input" type="text" value="16:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">✈</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">후쿠오카 공항 도착</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">입국 심사 후 지하철로 호텔 이동</span>
+        <span class="place-tip editable" data-field="tip">💡 공항 → 텐진역 지하철 약 10분 (공항선)</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day1" data-sched-idx="1">
+    <button class="item-delete" onclick="deleteItem('day1',1)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">17:00</span>
+        <input class="time-input" type="text" value="17:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🏨</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">더 브렉퍼스트 호텔 텐진</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/uybWS7R9hCn5xx5b7" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">체크인 &amp; 짐 정리</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진역에서 도보 5분 이내</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day1" data-sched-idx="2">
+    <button class="item-delete" onclick="deleteItem('day1',2)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">18:30</span>
+        <input class="time-input" type="text" value="18:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🍜</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">이치란라멘 텐진점</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/upvaMc9NzksTSuMYA" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">개인 칸막이 1인 라멘 원조 맛집. 진한 돈코츠 국물</span>
+        <span class="place-tip editable" data-field="tip">💡 줄 서는 경우 있으니 조금 여유있게 이동</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day1" data-sched-idx="3">
+    <button class="item-delete" onclick="deleteItem('day1',3)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">20:00</span>
+        <input class="time-input" type="text" value="20:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🛍</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진 쇼핑</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">비비안 웨스트우드 · 몽벨 · 돈키호테</span>
+        <span class="place-tip editable" data-field="tip">💡 돈키호테는 밤 늦게까지 운영</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day1" data-sched-idx="4">
+    <button class="item-delete" onclick="deleteItem('day1',4)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">21:30</span>
+        <input class="time-input" type="text" value="21:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🏮</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">나카스 포장마차 거리</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">후쿠오카 명물 포장마차에서 야식. 야키토리 · 라멘 · 오뎅</span>
+        <span class="place-tip editable" data-field="tip">💡 택시로 이동 약 10분 / 1인도 환영</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div></div>
     <button class="add-item-btn" onclick="openAddModal('day1')">＋ 일정 추가</button>
   </div>
 
   <!-- 2일차 -->
   <div class="tab-panel" id="day-1">
     <div class="course-toggle">
-      <button class="course-btn active-teal" id="course-a-btn" onclick="showCourse('a')">
+      <button class="course-btn" id="course-a-btn" onclick="showCourse('a')">
         🌿 1안 · 오호리공원 + 롯폰마츠<br><small style="font-weight:400;font-size:11px;">여유로운 도심 산책 코스</small>
       </button>
-      <button class="course-btn" id="course-b-btn" onclick="showCourse('b')">
+      <button class="course-btn active-blue" id="course-b-btn" onclick="showCourse('b')">
         🌸 2안 · 우미노나카미치<br><small style="font-weight:400;font-size:11px;">네모필라 꽃밭 + 자연 코스</small>
       </button>
     </div>
 
-    <div id="course-a">
+    <div id="course-a" style="display: none;">
       <div class="section-label">
         <span class="section-pill pill-teal">1안 동선</span>
         <div class="section-line"></div>
@@ -264,11 +372,143 @@
         <div class="flow-stop rose">🌅<br>17:00<br>모모치해변</div><span class="flow-arrow">›</span>
         <div class="flow-stop">🥘<br>19:30<br>모츠나베</div>
       </div>
-      <div class="schedule" id="sched-day2a"></div>
+      <div class="schedule" id="sched-day2a"><div class="sched-item" data-sched-key="day2a" data-sched-idx="0">
+    <button class="item-delete" onclick="deleteItem('day2a',0)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">09:00</span>
+        <input class="time-input" type="text" value="09:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🌿</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">오호리 공원 산책</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/zdiLgMLn3a9bjA4f6" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">후쿠오카 도심 속 대형 호수 공원. 아침 산책 최적</span>
+        <span class="place-tip editable" data-field="tip">💡 호텔에서 도보 약 15분</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2a" data-sched-idx="1">
+    <button class="item-delete" onclick="deleteItem('day2a',1)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">10:30</span>
+        <input class="time-input" type="text" value="10:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">☕</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">롯폰마츠 카페 &amp; 거리 구경</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/CrcHe8awaqoHpSCj6" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">감각적인 카페와 편집숍이 모인 조용한 동네</span>
+        <span class="place-tip editable" data-field="tip">💡 오호리공원에서 도보 10분</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2a" data-sched-idx="2">
+    <button class="item-delete" onclick="deleteItem('day2a',2)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">12:00</span>
+        <input class="time-input" type="text" value="12:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🍱</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진 점심</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">규카츠 / 카이센동 / 텐동 중 선택</span>
+        <span class="place-tip editable" data-field="tip">💡 지하철 약 10분 / 텐진역 주변 식당가</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2a" data-sched-idx="3">
+    <button class="item-delete" onclick="deleteItem('day2a',3)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">13:30</span>
+        <input class="time-input" type="text" value="13:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🛍</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진 쇼핑</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)</span>
+        <span class="place-tip editable" data-field="tip">💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2a" data-sched-idx="4">
+    <button class="item-delete" onclick="deleteItem('day2a',4)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">17:00</span>
+        <input class="time-input" type="text" value="17:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🌅</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">모모치해변</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/sY2RqhXBcCSHp3AM7" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">일몰 18:49 — 서쪽 방향 노을 명소</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진에서 버스 약 20분. 17:30 이전 출발 권장</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2a" data-sched-idx="5">
+    <button class="item-delete" onclick="deleteItem('day2a',5)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">19:30</span>
+        <input class="time-input" type="text" value="19:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🥘</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">모츠나베</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/BEGEdDKuQp32EzwK9" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진·나카스 주변 전문점. 1인 약 3,000엔</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div></div>
       <button class="add-item-btn" onclick="openAddModal('day2a')">＋ 일정 추가</button>
     </div>
 
-    <div id="course-b" style="display:none;">
+    <div id="course-b" style="display: block;">
       <div class="section-label">
         <span class="section-pill pill-navy">2안 동선</span>
         <div class="section-line"></div>
@@ -281,7 +521,205 @@
         <div class="flow-stop rose">🌅<br>17:00<br>모모치해변</div><span class="flow-arrow">›</span>
         <div class="flow-stop">🥘<br>19:30<br>모츠나베</div>
       </div>
-      <div class="schedule" id="sched-day2b"></div>
+      <div class="schedule" id="sched-day2b"><div class="sched-item" data-sched-key="day2b" data-sched-idx="0">
+    <button class="item-delete" onclick="deleteItem('day2b',0)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">09:00</span>
+        <input class="time-input" type="text" value="09:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🚉</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진역 출발</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">지하철 공항선 → 하카타역 → JR 가시이선 환승</span>
+        <span class="place-tip editable" data-field="tip">💡 환승 1회 / 총 소요시간 약 40~50분</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="1">
+    <button class="item-delete" onclick="deleteItem('day2b',1)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">09:40</span>
+        <input class="time-input" type="text" value="09:40">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🌸</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">우미노나카미치 해변공원 입장</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/eUqt8GCyH22roNAq7" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">4월 네모필라 꽃밭 + 벚꽃 동시 절정. 입장료 450엔</span>
+        <span class="place-tip editable" data-field="tip">💡 자전거 대여 강력 추천 (600엔/3시간)</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="2">
+    <button class="item-delete" onclick="deleteItem('day2b',2)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">10:00</span>
+        <input class="time-input" type="text" value="10:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🚲</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">자전거로 공원 투어</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/eUqt8GCyH22roNAq7" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">꽃밭 언덕 → 동물원 → 바다 전망 산책로</span>
+        <span class="place-tip editable" data-field="tip">💡 공원이 넓어서 자전거 없이는 다 못 돌아봐요</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="3">
+    <button class="item-delete" onclick="deleteItem('day2b',3)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">12:00</span>
+        <input class="time-input" type="text" value="12:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🐒</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">동물원 &amp; 피크닉 (선택)</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">카피바라, 다람쥐원숭이 등 귀여운 동물 구역</span>
+        <span class="place-tip editable" data-field="tip">💡 잔디밭에서 도시락 먹어도 좋아요</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="4">
+    <button class="item-delete" onclick="deleteItem('day2b',4)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">12:30</span>
+        <input class="time-input" type="text" value="12:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🚉</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">공원 출발 → 텐진 복귀</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">JR 우미노나카미치역 → 하카타 → 텐진 (약 50분)</span>
+        <span class="place-tip editable" data-field="tip">💡 공원 마감 17:30 전 퇴장 필수</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="5">
+    <button class="item-delete" onclick="deleteItem('day2b',5)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">13:20</span>
+        <input class="time-input" type="text" value="13:20">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🍱</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진 점심</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">규카츠 / 카이센동 / 텐동 중 선택</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진역 주변 식당가</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="6">
+    <button class="item-delete" onclick="deleteItem('day2b',6)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">14:30</span>
+        <input class="time-input" type="text" value="14:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🛍</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">텐진 쇼핑</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)</span>
+        <span class="place-tip editable" data-field="tip">💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="7">
+    <button class="item-delete" onclick="deleteItem('day2b',7)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">17:00</span>
+        <input class="time-input" type="text" value="17:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🌅</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">모모치해변 (시간 여유 시)</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/sY2RqhXBcCSHp3AM7" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">일몰 18:49 — 노을 명소. 쇼핑 후 바로 이동</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진에서 버스 약 20분 / 306번 버스</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day2b" data-sched-idx="8">
+    <button class="item-delete" onclick="deleteItem('day2b',8)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">19:30</span>
+        <input class="time-input" type="text" value="19:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🥘</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">모츠나베</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/BEGEdDKuQp32EzwK9" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!</span>
+        <span class="place-tip editable" data-field="tip">💡 텐진·나카스 전문점 / 1인 약 3,000엔</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div></div>
       <button class="add-item-btn" onclick="openAddModal('day2b')">＋ 일정 추가</button>
     </div>
 
@@ -296,9 +734,7 @@
             <div class="meal-desc">소고기 커틀릿. 화로에 직접 굽는 방식</div>
             <div class="meal-price">1,500~2,000엔</div>
             <div class="meal-selected-badge">✓ 선택됨</div>
-            <div class="meal-link-row" id="meal-link-row-0">
-              <button class="meal-link-btn no-link" id="meal-link-init-0">+ 구글 링크</button>
-            </div>
+            <div class="meal-link-row" id="meal-link-row-0"><a class="meal-link-btn has-link" href="https://maps.app.goo.gl/5qfMeZ2nHYExPiXd6" target="_blank" rel="noopener">🗺 지도</a><button class="meal-link-edit">✎</button></div>
           </div>
         </div>
         <div class="meal-card" id="meal-1" onclick="selectMeal(1)">
@@ -308,9 +744,7 @@
             <div class="meal-desc">신선한 해산물 회 덮밥</div>
             <div class="meal-price">1,500~2,500엔</div>
             <div class="meal-selected-badge">✓ 선택됨</div>
-            <div class="meal-link-row" id="meal-link-row-1">
-              <button class="meal-link-btn no-link" id="meal-link-init-1">+ 구글 링크</button>
-            </div>
+            <div class="meal-link-row" id="meal-link-row-1"><a class="meal-link-btn has-link" href="https://maps.app.goo.gl/NMdZWrQXBoguaeVp8" target="_blank" rel="noopener">🗺 지도</a><button class="meal-link-edit">✎</button></div>
           </div>
         </div>
         <div class="meal-card" id="meal-2" onclick="selectMeal(2)">
@@ -320,9 +754,7 @@
             <div class="meal-desc">새우·채소 튀김 덮밥</div>
             <div class="meal-price">1,000~1,500엔</div>
             <div class="meal-selected-badge">✓ 선택됨</div>
-            <div class="meal-link-row" id="meal-link-row-2">
-              <button class="meal-link-btn no-link" id="meal-link-init-2">+ 구글 링크</button>
-            </div>
+            <div class="meal-link-row" id="meal-link-row-2"><a class="meal-link-btn has-link" href="https://maps.app.goo.gl/wQjynb4wMB7XDzVr9" target="_blank" rel="noopener">🗺 지도</a><button class="meal-link-edit">✎</button></div>
           </div>
         </div>
       </div>
@@ -331,7 +763,7 @@
   </div>
 
   <!-- 3일차 -->
-  <div class="tab-panel" id="day-2">
+  <div class="tab-panel active" id="day-2">
     <div class="section-label">
       <span class="section-pill pill-rose">마지막 날 · 귀국</span>
       <div class="section-line"></div>
@@ -342,7 +774,95 @@
       <div class="flow-stop amber">✈<br>오후<br>공항이동</div><span class="flow-arrow">›</span>
       <div class="flow-stop rose">🏠<br>저녁<br>귀국</div>
     </div>
-    <div class="schedule" id="sched-day3"></div>
+    <div class="schedule" id="sched-day3"><div class="sched-item" data-sched-key="day3" data-sched-idx="0">
+    <button class="item-delete" onclick="deleteItem('day3',0)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">08:00</span>
+        <input class="time-input" type="text" value="08:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">☀</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">조식 &amp; 체크아웃</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">미쓰이 가든 기온 체크아웃 후 짐 맡기기</span>
+        <span class="place-tip editable" data-field="tip">💡 체크아웃 시간 11:00 전 확인</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day3" data-sched-idx="1">
+    <button class="item-delete" onclick="deleteItem('day3',1)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">09:30</span>
+        <input class="time-input" type="text" value="09:30">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🕍</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">후쿠오카 대불</span>
+          <span class="link-btns"><a class="google-link-btn has-link" href="https://maps.app.goo.gl/GYTVGR2igXYj4sQ96" target="_blank" rel="noopener">🗺 지도</a><button class="google-link-edit">✎</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">사원</span>
+        <span class="place-tip editable" data-field="tip">💡</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day3" data-sched-idx="2">
+    <button class="item-delete" onclick="deleteItem('day3',2)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">12:00</span>
+        <input class="time-input" type="text" value="12:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">🍜</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">마지막 점심</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">후쿠오카에서 못 먹은 것 한 번 더</span>
+        <span class="place-tip editable" data-field="tip">💡 하카타 라멘 / 야키토리 추천</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div><div class="sched-item" data-sched-key="day3" data-sched-idx="3">
+    <button class="item-delete" onclick="deleteItem('day3',3)" title="삭제">✕</button>
+    <div class="sched-main">
+      <div class="sched-time-col">
+        <span class="time-display" title="클릭해서 시간 수정">14:00</span>
+        <input class="time-input" type="text" value="14:00">
+      </div>
+      <div class="sched-icon-col" title="클릭해서 아이콘 변경">✈</div>
+      <div class="sched-content-col">
+        <div class="place-name-row">
+          <span class="place-name editable" data-field="place">후쿠오카 공항 이동</span>
+          <span class="link-btns"><button class="google-link-btn no-link">+ 구글 링크</button></span>
+        </div>
+        <span class="place-desc editable" data-field="desc">지하철 공항선으로 약 10분</span>
+        <span class="place-tip editable" data-field="tip">💡 공항 2시간 전 도착 권장</span>
+        <span class="edit-hint">✏ 텍스트 클릭 수정 · 아이콘 클릭 변경 · 시간 변경 시 자동 정렬</span>
+      </div>
+      <div class="photo-col" title="클릭해서 사진 추가">
+        <div class="photo-placeholder"><span>📷</span><span>사진 추가<br>클릭</span></div>
+        <button class="photo-delete" onclick="deletePhoto(event,this)">✕</button>
+        <input type="file" class="photo-input" accept="image/*">
+      </div>
+    </div></div></div>
     <button class="add-item-btn" onclick="openAddModal('day3')">＋ 일정 추가</button>
   </div>
 </div>
@@ -860,13 +1380,14 @@ function saveData() {
       /\/\/ ──SNAPSHOT_START──[\s\S]*?\/\/ ──SNAPSHOT_END──/,
       ''
     ).replace(
-      'loadSaved();',
-      `// ──SNAPSHOT_START──
-const _snap = ${snapshot};
+      '// ──SNAPSHOT_START──
+const _snap = {"schedData":{"day1":[{"time":"16:00","icon":"✈","place":"후쿠오카 공항 도착","desc":"입국 심사 후 지하철로 호텔 이동","tip":"💡 공항 → 텐진역 지하철 약 10분 (공항선)"},{"time":"17:00","icon":"🏨","place":"더 브렉퍼스트 호텔 텐진","desc":"체크인 & 짐 정리","tip":"💡 텐진역에서 도보 5분 이내","googleUrl":"https://maps.app.goo.gl/uybWS7R9hCn5xx5b7"},{"time":"18:30","icon":"🍜","place":"이치란라멘 텐진점","desc":"개인 칸막이 1인 라멘 원조 맛집. 진한 돈코츠 국물","tip":"💡 줄 서는 경우 있으니 조금 여유있게 이동","googleUrl":"https://maps.app.goo.gl/upvaMc9NzksTSuMYA"},{"time":"20:00","icon":"🛍","place":"텐진 쇼핑","desc":"비비안 웨스트우드 · 몽벨 · 돈키호테","tip":"💡 돈키호테는 밤 늦게까지 운영"},{"time":"21:30","icon":"🏮","place":"나카스 포장마차 거리","desc":"후쿠오카 명물 포장마차에서 야식. 야키토리 · 라멘 · 오뎅","tip":"💡 택시로 이동 약 10분 / 1인도 환영"}],"day2a":[{"time":"09:00","icon":"🌿","place":"오호리 공원 산책","desc":"후쿠오카 도심 속 대형 호수 공원. 아침 산책 최적","tip":"💡 호텔에서 도보 약 15분","googleUrl":"https://maps.app.goo.gl/zdiLgMLn3a9bjA4f6"},{"time":"10:30","icon":"☕","place":"롯폰마츠 카페 & 거리 구경","desc":"감각적인 카페와 편집숍이 모인 조용한 동네","tip":"💡 오호리공원에서 도보 10분","googleUrl":"https://maps.app.goo.gl/CrcHe8awaqoHpSCj6"},{"time":"12:00","icon":"🍱","place":"텐진 점심","desc":"규카츠 / 카이센동 / 텐동 중 선택","tip":"💡 지하철 약 10분 / 텐진역 주변 식당가"},{"time":"13:30","icon":"🛍","place":"텐진 쇼핑","desc":"GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)","tip":"💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분"},{"time":"17:00","icon":"🌅","place":"모모치해변","desc":"일몰 18:49 — 서쪽 방향 노을 명소","tip":"💡 텐진에서 버스 약 20분. 17:30 이전 출발 권장","googleUrl":"https://maps.app.goo.gl/sY2RqhXBcCSHp3AM7"},{"time":"19:30","icon":"🥘","place":"모츠나베","desc":"후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!","tip":"💡 텐진·나카스 주변 전문점. 1인 약 3,000엔","googleUrl":"https://maps.app.goo.gl/BEGEdDKuQp32EzwK9"}],"day2b":[{"time":"09:00","icon":"🚉","place":"텐진역 출발","desc":"지하철 공항선 → 하카타역 → JR 가시이선 환승","tip":"💡 환승 1회 / 총 소요시간 약 40~50분"},{"time":"09:40","icon":"🌸","place":"우미노나카미치 해변공원 입장","desc":"4월 네모필라 꽃밭 + 벚꽃 동시 절정. 입장료 450엔","tip":"💡 자전거 대여 강력 추천 (600엔/3시간)","googleUrl":"https://maps.app.goo.gl/eUqt8GCyH22roNAq7"},{"time":"10:00","icon":"🚲","place":"자전거로 공원 투어","desc":"꽃밭 언덕 → 동물원 → 바다 전망 산책로","tip":"💡 공원이 넓어서 자전거 없이는 다 못 돌아봐요","googleUrl":"https://maps.app.goo.gl/eUqt8GCyH22roNAq7"},{"time":"12:00","icon":"🐒","place":"동물원 & 피크닉 (선택)","desc":"카피바라, 다람쥐원숭이 등 귀여운 동물 구역","tip":"💡 잔디밭에서 도시락 먹어도 좋아요"},{"time":"12:30","icon":"🚉","place":"공원 출발 → 텐진 복귀","desc":"JR 우미노나카미치역 → 하카타 → 텐진 (약 50분)","tip":"💡 공원 마감 17:30 전 퇴장 필수"},{"time":"13:20","icon":"🍱","place":"텐진 점심","desc":"규카츠 / 카이센동 / 텐동 중 선택","tip":"💡 텐진역 주변 식당가"},{"time":"14:30","icon":"🛍","place":"텐진 쇼핑","desc":"GU (미나텐진 3F) · 유니클로 (1~2F) · 휴먼메이드 (다이묘)","tip":"💡 GU·유니클로 같은 건물 / 휴먼메이드 도보 10분"},{"time":"17:00","icon":"🌅","place":"모모치해변 (시간 여유 시)","desc":"일몰 18:49 — 노을 명소. 쇼핑 후 바로 이동","tip":"💡 텐진에서 버스 약 20분 / 306번 버스","googleUrl":"https://maps.app.goo.gl/sY2RqhXBcCSHp3AM7"},{"time":"19:30","icon":"🥘","place":"모츠나베","desc":"후쿠오카 향토 요리 곱창전골. 챤폰면 사리 추가 필수!","tip":"💡 텐진·나카스 전문점 / 1인 약 3,000엔","googleUrl":"https://maps.app.goo.gl/BEGEdDKuQp32EzwK9"}],"day3":[{"time":"08:00","icon":"☀","place":"조식 & 체크아웃","desc":"미쓰이 가든 기온 체크아웃 후 짐 맡기기","tip":"💡 체크아웃 시간 11:00 전 확인"},{"time":"09:30","icon":"🕍","place":"후쿠오카 대불","desc":"사원","tip":"💡","googleUrl":"https://maps.app.goo.gl/GYTVGR2igXYj4sQ96"},{"time":"12:00","icon":"🍜","place":"마지막 점심","desc":"후쿠오카에서 못 먹은 것 한 번 더","tip":"💡 하카타 라멘 / 야키토리 추천"},{"time":"14:00","icon":"✈","place":"후쿠오카 공항 이동","desc":"지하철 공항선으로 약 10분","tip":"💡 공항 2시간 전 도착 권장"}]},"mealLinks":["https://maps.app.goo.gl/5qfMeZ2nHYExPiXd6","https://maps.app.goo.gl/NMdZWrQXBoguaeVp8","https://maps.app.goo.gl/wQjynb4wMB7XDzVr9"],"mealPhotos":["","",""]};
 schedData = _snap.schedData;
 if(_snap.mealLinks) _snap.mealLinks.forEach((u,i)=>{ mealLinks[i]=u; if(u) renderMealLinkRow(i,u); });
 if(_snap.mealPhotos) _snap.mealPhotos.forEach((p,i)=>{ if(p){ mealPhotos[i]=p; const img=document.getElementById('meal-photo-'+i); if(img){img.src=p;img.style.display='block';} } });
 // ──SNAPSHOT_END──
+loadSaved();',
+      `
 loadSaved();`
     );
     const blob = new Blob([injected], {type:'text/html;charset=utf-8'});
@@ -917,5 +1438,6 @@ renderAll();
     </div>
   </div>
 </div>
-</body>
-</html>
+
+
+</body></html>
